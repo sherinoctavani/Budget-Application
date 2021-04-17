@@ -11,12 +11,46 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Income.belongsTo(models.User, {
+        foreignKey: 'IUserId',
+        targetKey:'id'
+      })
     }
   };
   Income.init({
-    description: DataTypes.STRING,
-    nominal: DataTypes.INTEGER,
-    date: DataTypes.DATE
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate : {
+        notEmpty: {
+          args: true,
+          msg: 'Description is Required'
+        }
+      }
+    },
+    nominal: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate : {
+        notEmpty: {
+          args: true,
+          msg: 'Nominal is Required'
+        }
+      }
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate : {
+        notEmpty: {
+          args: true,
+          msg: 'Nominal is Required'
+        }
+      }
+    },
+    IUserId : {
+      type : DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Income',

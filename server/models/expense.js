@@ -11,12 +11,46 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Expense.belongsTo(models.User, {
+        foreignKey: 'EUserId',
+        targetKey:'id'
+      })
     }
   };
   Expense.init({
-    description: DataTypes.STRING,
-    nominal: DataTypes.INTEGER,
-    date: DataTypes.DATE
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate : {
+        notEmpty: {
+          args: true,
+          msg: 'Description is Required'
+        }
+      }
+    },
+    nominal: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate : {
+        notEmpty: {
+          args: true,
+          msg: 'Nominal is Required'
+        }
+      }
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate : {
+        notEmpty: {
+          args: true,
+          msg: 'Nominal is Required'
+        }
+      }
+    },
+    EUserId : {
+      type : DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Expense',
