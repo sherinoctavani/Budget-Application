@@ -1,2 +1,2 @@
-# Budget-Application-MC-Paymen-FAT
+# Budget-Application
 Budget Application Manage your Budget
